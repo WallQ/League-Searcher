@@ -1,4 +1,6 @@
-export default interface summonerInt {
+import errorInt from './status';
+
+export default interface summonerInt extends errorInt {
 	id: string;
 	accountId: string;
 	puuid: string;

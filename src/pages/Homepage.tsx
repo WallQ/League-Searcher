@@ -3,7 +3,7 @@ import { getSummonerByName } from '../services/riotAPI';
 
 // Types
 import summonerInt from '../types/summoner';
-import { SearchFormInt } from '../components/SearchForm/SearchFormType';
+import { SearchFormDataInt } from '../components/SearchForm/SearchFormTypes';
 
 // Components
 import ProfileCardPlaceHolder from '../components/ProfileCard/ProfileCardPlaceHolder';
@@ -17,22 +17,21 @@ const ProfileCard = React.lazy(
 const Homepage: React.FunctionComponent = () => {
 	const [summoner, setSummoner] = React.useState<summonerInt | null>(null);
 
-	const onSubmit = (data: SearchFormInt) => {
-		console.log('Antes => ', summoner);
-		getSummonerByName(data.username, data.region)
+	const onSubmit = (data: SearchFormDataInt) => {
+		getSummonerByName(data.region, data.username)
 			.then((summoner: summonerInt) => {
-				console.log(summoner);
+				if (summoner.status) return setSummoner(null);
 				setSummoner(summoner);
 			})
 			.catch((error) => {
-				console.error(error);
+				console.error('Error => ', error);
 				setSummoner(null);
 			});
 	};
 
 	return (
 		<React.Fragment>
-			<div className='container mx-auto flex h-screen flex-col gap-y-4 px-4 py-12 sm:px-6 lg:px-8'>
+			<div className='container mx-auto flex h-screen flex-col items-center gap-y-16 px-4 py-12 sm:px-6 lg:px-8'>
 				<SearchForm onSubmit={onSubmit} />
 				{summoner && (
 					<React.Suspense fallback={<ProfileCardPlaceHolder />}>

@@ -6,46 +6,46 @@ export interface regionsInt {
 export const regions = [
 	{
 		initials: 'BR',
-		url: 'https://br1.api.riotgames.com',
+		url: 'br1',
 	},
 	{
 		initials: 'EUN',
-		url: 'https://eun1.api.riotgames.com',
+		url: 'eun1',
 	},
 	{
 		initials: 'EUW',
-		url: 'https://euw1.api.riotgames.com',
+		url: 'euw1',
 	},
 	{
 		initials: 'JP',
-		url: 'https://jp1.api.riotgames.com',
+		url: 'jp1',
 	},
 	{
 		initials: 'KR',
-		url: 'https://kr.api.riotgames.com',
+		url: 'kr',
 	},
 	{
 		initials: 'LAN',
-		url: 'https://la1.api.riotgames.com',
+		url: 'la1',
 	},
 	{
 		initials: 'LAS',
-		url: 'https://la2.api.riotgames.com',
+		url: 'la2',
 	},
 	{
 		initials: 'NA',
-		url: 'https://na1.api.riotgames.com',
+		url: 'na1',
 	},
 	{
 		initials: 'OC',
-		url: 'https://oc1.api.riotgames.com',
+		url: 'oc1',
 	},
 	{
 		initials: 'RU',
-		url: 'https://ru.api.riotgames.com',
+		url: 'ru',
 	},
 	{
 		initials: 'TR',
-		url: 'https://tr1.api.riotgames.com',
+		url: 'tr1',
 	},
 ];
