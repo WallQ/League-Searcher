@@ -5,7 +5,6 @@ const fetchFromAPI = (endpoint: string) => {
 		.get(endpoint, {
 			headers: {
 				'Content-Type': 'application/json',
-				Origin: 'https://league-searcher.vercel.app/',
 				'X-Riot-Token': import.meta.env.VITE_RIOT_API_KEY || '',
 			},
 		})
