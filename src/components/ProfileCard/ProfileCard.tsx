@@ -14,7 +14,7 @@ const ProfileCard: React.FunctionComponent<ProfileCardInt> = ({
 						{level}
 					</h3>
 					<img
-						src={`http://ddragon.leagueoflegends.com/cdn/12.13.1/img/profileicon/${iconId}.png`}
+						src={`https://ddragon.leagueoflegends.com/cdn/12.13.1/img/profileicon/${iconId}.png`}
 						alt='Summoner Icon'
 						loading='eager'
 						width={64}
