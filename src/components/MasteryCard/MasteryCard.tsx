@@ -2,6 +2,7 @@ import React from 'react';
 import champions from '../../data/champion.json';
 import { MasteryCardInt } from './MasteryCardType';
 
+import numberToMastery from '../../utils/numberToMastery';
 import formatNumber from '../../utils/formatNumber';
 
 const MasteryCard: React.FunctionComponent<MasteryCardInt> = ({
@@ -16,16 +17,28 @@ const MasteryCard: React.FunctionComponent<MasteryCardInt> = ({
 	return (
 		<React.Fragment>
 			{championData && (
-				<div className='flex flex-col flex-wrap items-center justify-center gap-4 align-middle'>
-					<div className='rounded-full border-4 border-amber-500 p-2'>
-						<img
-							src={`https://ddragon.leagueoflegends.com/cdn/12.13.1/img/champion/${championData.name}.png`}
-							alt='Champion Avatar'
-							loading='eager'
-							width={64}
-							height={64}
-							className='h-32 w-32 rounded-full border-2 border-amber-500'
-						/>
+				<div className='flex flex-col flex-wrap items-center justify-center gap-16 align-middle'>
+					<div className='relative'>
+						<div className='absolute -bottom-16 left-0 right-0 z-50 mx-auto flex flex-row items-center justify-center'>
+							<img
+								src={numberToMastery(7)}
+								alt='Mastery Image'
+								loading='eager'
+								width={32}
+								height={32}
+								className='h-32 w-32'
+							/>
+						</div>
+						<div className='rounded-full border-4 border-amber-500 p-2'>
+							<img
+								src={`https://ddragon.leagueoflegends.com/cdn/12.13.1/img/champion/${championData.name}.png`}
+								alt='Champion Avatar'
+								loading='eager'
+								width={32}
+								height={32}
+								className='h-32 w-32 rounded-full border-2 border-amber-500'
+							/>
+						</div>
 					</div>
 					<div className='flex flex-col flex-wrap items-center justify-center align-middle'>
 						<h2 className='text-2xl font-bold text-white'>
@@ -35,12 +48,11 @@ const MasteryCard: React.FunctionComponent<MasteryCardInt> = ({
 							{championData.title}
 						</p>
 					</div>
-					<p className='text-base font-normal text-white'>
-						Champion Level: {championLevel}
-					</p>
-					<p className='text-base font-normal text-white'>
-						Champion Points: {formatNumber(championPoints)}
-					</p>
+					<div>
+						<p className='text-base font-normal text-white'>
+							Champion Points: {formatNumber(championPoints)}
+						</p>
+					</div>
 				</div>
 			)}
 		</React.Fragment>
