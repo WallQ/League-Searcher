@@ -4,11 +4,17 @@ import React from 'react';
 import { getSummonerByName, getChampionsMasteries } from '../services/riotAPI';
 
 // Contexts
-import { SummonerContextType, SummonerContext } from '../contexts/Summoner/summoner';
+import {
+	SummonerContextType,
+	SummonerContext,
+} from '../contexts/Summoner/summoner';
 
 //Types
 import { SearchFormDataInt } from '../components/SearchForm/SearchFormTypes';
-import { SummonerType, ChampionMasteryType } from '../contexts/Summoner/stateTypes';
+import {
+	SummonerType,
+	ChampionMasteryType,
+} from '../contexts/Summoner/stateTypes';
 
 // PlaceHolder's
 
@@ -43,7 +49,7 @@ const Homepage: React.FunctionComponent = () => {
 
 	return (
 		<React.Fragment>
-			<div className='container mx-auto flex flex-col items-center gap-16 px-4 py-12 sm:px-6 lg:px-8'>
+			<div className='container mx-auto flex flex-col items-center gap-16 px-4 py-16 sm:px-6 lg:px-8'>
 				<SearchForm onSubmit={onSubmit} />
 				{notFound ? (
 					<React.Fragment>
