@@ -1,6 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaLinkedin, FaGithub, FaEnvelope } from 'react-icons/fa';
+import {
+	GithubIcon,
+	LinkedinIcon,
+	EnvelopeIcon,
+} from '../../assets/icons/Icons';
 
 const Navbar: React.FunctionComponent = () => {
 	return (
@@ -19,10 +23,7 @@ const Navbar: React.FunctionComponent = () => {
 									href='https://github.com/WallQ'
 									rel='noreferrer'
 									target='_blank'>
-									<FaGithub
-										className='h-6 w-6 text-white'
-										aria-hidden='true'
-									/>
+									<GithubIcon styles={'h-6 w-6 text-white'} />
 								</a>
 							</li>
 							<li>
@@ -30,18 +31,12 @@ const Navbar: React.FunctionComponent = () => {
 									href='https://www.linkedin.com/in/sergiofelixdev/'
 									rel='noreferrer'
 									target='_blank'>
-									<FaLinkedin
-										className='h-6 w-6 text-white'
-										aria-hidden='true'
-									/>
+									<LinkedinIcon styles={'h-6 w-6 text-white'} />
 								</a>
 							</li>
 							<li>
 								<a href='mailto:sergiofelixdev@gmail.com'>
-									<FaEnvelope
-										className='h-6 w-6 text-white'
-										aria-hidden='true'
-									/>
+									<EnvelopeIcon styles={'h-6 w-6 text-white'} />
 								</a>
 							</li>
 						</ol>

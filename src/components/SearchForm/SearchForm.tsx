@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaSearch } from 'react-icons/fa';
+import { SearchIcon } from '../../assets/icons/Icons';
 import { useForm } from 'react-hook-form';
 import { SearchFormInt, SearchFormDataInt } from './SearchFormTypes';
 import { regions, regionsInt } from '../../utils/regions';
@@ -87,9 +87,8 @@ const SearchForm: React.FunctionComponent<SearchFormInt> = ({ onSubmit }) => {
 									})}
 								/>
 								<div className='pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3'>
-									<FaSearch
-										className='h-4 w-4 text-gray-500'
-										aria-hidden='true'
+									<SearchIcon
+										styles={'h-4 w-4 text-gray-500'}
 									/>
 								</div>
 							</div>

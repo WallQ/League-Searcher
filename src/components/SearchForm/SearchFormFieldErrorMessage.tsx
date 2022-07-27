@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaExclamationTriangle } from 'react-icons/fa';
+import { ExclamationTriangleIcon } from '../../assets/icons/Icons';
 import { SearchFormFieldErrorMessageInt } from './SearchFormTypes';
 
 const SearchFormFieldErrorMessage: React.FunctionComponent<
@@ -8,10 +8,7 @@ const SearchFormFieldErrorMessage: React.FunctionComponent<
 	return (
 		<React.Fragment>
 			<span className='inline-flex items-center gap-x-2 align-middle text-sm font-normal text-red-500'>
-				<FaExclamationTriangle
-					className='h-4 w-4 text-red-500'
-					aria-hidden='true'
-				/>
+				<ExclamationTriangleIcon styles={'h-4 w-4 text-red-500'} />
 				{message}
 			</span>
 		</React.Fragment>
