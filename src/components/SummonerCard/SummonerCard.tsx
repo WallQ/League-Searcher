@@ -1,5 +1,5 @@
 import React from 'react';
-import { ProfileCardInt } from './ProfileCardType';
+import { ProfileCardInt } from './SummonerCardTypes';
 
 const ProfileCard: React.FunctionComponent<ProfileCardInt> = ({
 	name,
@@ -24,7 +24,7 @@ const ProfileCard: React.FunctionComponent<ProfileCardInt> = ({
 						/>
 					</div>
 				</div>
-				<h1 className='text-3xl font-black text-white'>{name}</h1>
+				<h1 className='text-3xl font-extrabold text-white'>{name}</h1>
 			</div>
 		</React.Fragment>
 	);

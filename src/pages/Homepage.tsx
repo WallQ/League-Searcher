@@ -1,73 +1,83 @@
 import React from 'react';
-import { getSummonerByName, getTop3ChampionMastery } from '../services/riotAPI';
 
-// Types
-import summonerInt from '../types/SummonerDTO';
-import masteryInt from '../types/ChampionMasteryDTO';
+// API's
+import { getSummonerByName, getChampionsMasteries } from '../services/riotAPI';
+
+// Contexts
+import { SummonerContextType, SummonerContext } from '../contexts/Summoner/summoner';
+
+//Types
 import { SearchFormDataInt } from '../components/SearchForm/SearchFormTypes';
+import { SummonerType, ChampionMasteryType } from '../contexts/Summoner/stateTypes';
+
+// PlaceHolder's
 
 // Components
-import ProfileCardPlaceHolder from '../components/ProfileCard/ProfileCardPlaceHolder';
-const SearchForm = React.lazy(
-	() => import('../components/SearchForm/SearchForm')
-);
-const ProfileCard = React.lazy(
-	() => import('../components/ProfileCard/ProfileCard')
-);
-const MasteryCard = React.lazy(
-	() => import('../components/MasteryCard/MasteryCard')
-);
+import SearchForm from '../components/SearchForm/SearchForm';
+import SummonerCard from '../components/SummonerCard/SummonerCard';
+import MasteryCard from '../components/MasteryCard/MasteryCard';
 
 const Homepage: React.FunctionComponent = () => {
-	const [summoner, setSummoner] = React.useState<summonerInt | null>(null);
-	const [mastery, setMastery] = React.useState<masteryInt[] | null>(null);
+	const { summoner, setSummoner, championsMasteries, setChampionsMasteries } =
+		React.useContext(SummonerContext) as SummonerContextType;
+	const [notFound, setNotFound] = React.useState<boolean | null>(null);
 
 	const onSubmit = (data: SearchFormDataInt) => {
 		getSummonerByName(data.region, data.username)
-			.then((summoner: summonerInt) => {
+			.then((summoner: SummonerType) => {
+				if (summoner.status !== undefined) {
+					setNotFound(true);
+					setSummoner(null);
+					return;
+				}
+				setNotFound(false);
 				setSummoner(summoner);
-
-				getTop3ChampionMastery(data.region, summoner.id)
-					.then((mastery: masteryInt[]) => {
-						setMastery(mastery);
-					})
-					.catch((error) => {
-						console.error('Error => ', error);
-						setMastery(null);
-					});
+				getChampionsMasteries(data.region, summoner.id)
+					.then((championsMasteries: ChampionMasteryType[]) =>
+						setChampionsMasteries(championsMasteries)
+					)
+					.catch((error) => console.error('Error => ', error));
 			})
-			.catch((error) => {
-				console.error('Error => ', error);
-				setSummoner(null);
-			});
+			.catch((error) => console.error('Error => ', error));
 	};
 
 	return (
 		<React.Fragment>
 			<div className='container mx-auto flex flex-col items-center gap-16 px-4 py-12 sm:px-6 lg:px-8'>
 				<SearchForm onSubmit={onSubmit} />
+				{notFound ? (
+					<React.Fragment>
+						<p className='text-3xl font-extrabold text-white'>
+							Summoner was not found!
+						</p>
+					</React.Fragment>
+				) : null}
 				{summoner && (
-					<React.Suspense fallback={<ProfileCardPlaceHolder />}>
-						<ProfileCard
+					<React.Fragment>
+						<SummonerCard
 							name={summoner.name}
 							iconId={summoner.profileIconId}
 							level={summoner.summonerLevel}
 						/>
-					</React.Suspense>
-				)}
-				{mastery && (
-					<div className='grid grid-cols-1 gap-24 lg:grid-cols-3'>
-						{mastery
-							.slice(0, 3)
-							.map((mastery: any, index: number) => (
-								<MasteryCard
-									key={`${index}-MasteryCard`}
-									championId={mastery.championId}
-									championLevel={mastery.championLevel}
-									championPoints={mastery.championPoints}
-								/>
-							))}
-					</div>
+						{championsMasteries && (
+							<div className='grid grid-cols-1 gap-24 lg:grid-cols-3'>
+								{championsMasteries
+									.slice(0, 3)
+									.map((mastery: any, index: number) => (
+										<MasteryCard
+											key={`${index}-MasteryCard`}
+											championId={mastery.championId}
+											championLevel={
+												mastery.championLevel
+											}
+											championPoints={
+												mastery.championPoints
+											}
+										/>
+									))}
+							</div>
+						)}
+					</React.Fragment>
 				)}
 			</div>
 		</React.Fragment>

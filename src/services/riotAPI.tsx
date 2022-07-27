@@ -15,7 +15,7 @@ export const getSummonerByName = (region: string, username: string) =>
 		}`
 	);
 
-export const getTop3ChampionMastery = (region: string, summonerId: string) =>
+export const getChampionsMasteries = (region: string, summonerId: string) =>
 	fetchFromAPI(
 		`https://cors-anywhere.herokuapp.com/https://${region}.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/${summonerId}?api_key=${
 			import.meta.env.VITE_RIOT_API_KEY || ''
