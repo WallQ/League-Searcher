@@ -31,7 +31,7 @@ const MasteryCard: React.FunctionComponent<MasteryCardInt> = ({
 						</div>
 						<div className='rounded-full border-4 border-amber-500 p-2'>
 							<img
-								src={`https://ddragon.leagueoflegends.com/cdn/12.13.1/img/champion/${championData.name}.png`}
+								src={`https://ddragon.leagueoflegends.com/cdn/12.13.1/img/champion/${championData.image.full}`}
 								alt='Champion Avatar'
 								loading='eager'
 								width={32}
@@ -42,7 +42,7 @@ const MasteryCard: React.FunctionComponent<MasteryCardInt> = ({
 					</div>
 					<div className='flex flex-col flex-wrap items-center justify-center gap-y-2 align-middle'>
 						<div className='flex flex-col flex-wrap items-center justify-center align-middle'>
-							<h2 className='text-2xl font-bold text-white'>
+							<h2 className='text-2xl font-bold text-amber-500'>
 								{championData.name}
 							</h2>
 							<p className='text-sm font-light capitalize text-white'>
