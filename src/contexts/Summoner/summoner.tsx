@@ -1,8 +1,13 @@
 import React from 'react';
-import { SummonerType, ChampionMasteryType } from './stateTypes';
+import {
+	SummonerType,
+	ChampionMasteryType,
+	SummonerLeagueType,
+} from './stateTypes';
 import {
 	summonerInitialState,
 	championsMasteriesInitialState,
+	summonerLeagueInitialState,
 } from './initialsValues';
 
 export type SummonerContextType = {
@@ -11,6 +16,10 @@ export type SummonerContextType = {
 	championsMasteries: Array<ChampionMasteryType> | null;
 	setChampionsMasteries: React.Dispatch<
 		React.SetStateAction<Array<ChampionMasteryType> | null>
+	>;
+	league: Array<SummonerLeagueType> | null;
+	setLeague: React.Dispatch<
+		React.SetStateAction<Array<SummonerLeagueType> | null>
 	>;
 };
 
@@ -28,6 +37,8 @@ export const SummonerContextProvider = ({
 	const [summoner, setSummoner] = React.useState<SummonerType | null>(null);
 	const [championsMasteries, setChampionsMasteries] =
 		React.useState<Array<ChampionMasteryType> | null>(null);
+	const [league, setLeague] =
+		React.useState<Array<SummonerLeagueType> | null>(null);
 
 	return (
 		<SummonerContext.Provider
@@ -36,6 +47,8 @@ export const SummonerContextProvider = ({
 				setSummoner,
 				championsMasteries,
 				setChampionsMasteries,
+				league,
+				setLeague,
 			}}>
 			{children}
 		</SummonerContext.Provider>

@@ -4,12 +4,12 @@ export interface StatusType {
 }
 
 export type SummonerType = {
-	id: string;
 	accountId: string;
-	puuid: string;
-	name: string;
 	profileIconId: number;
 	revisionDate: number;
+	name: string;
+	id: string;
+	puuid: string;
 	summonerLevel: number;
 	status?: StatusType;
 };
@@ -24,4 +24,20 @@ export type ChampionMasteryType = {
 	championPoints: number;
 	championPointsSinceLastLevel: number;
 	tokensEarned: number;
+};
+
+export type SummonerLeagueType = {
+	leagueId: string;
+	summonerId: string;
+	summonerName: string;
+	queueType: string;
+	tier: string;
+	rank: string;
+	leaguePoints: number;
+	wins: number;
+	losses: number;
+	hotStreak: boolean;
+	veteran: boolean;
+	freshBlood: boolean;
+	inactive: boolean;
 };

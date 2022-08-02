@@ -21,3 +21,21 @@ export const championsMasteriesInitialState = [
 		tokensEarned: NaN,
 	},
 ];
+
+export const summonerLeagueInitialState = [
+	{
+		leagueId: '',
+		summonerId: '',
+		summonerName: '',
+		queueType: '',
+		tier: '',
+		rank: '',
+		leaguePoints: NaN,
+		wins: NaN,
+		losses: NaN,
+		hotStreak: false,
+		veteran: false,
+		freshBlood: false,
+		inactive: false,
+	},
+];
