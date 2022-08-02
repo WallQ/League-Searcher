@@ -21,3 +21,10 @@ export const getChampionsMasteries = (region: string, summonerId: string) =>
 			import.meta.env.VITE_RIOT_API_KEY || ''
 		}`
 	);
+
+export const getSummonerLeague = (region: string, summonerId: string) =>
+	fetchFromAPI(
+		`https://cors-anywhere.herokuapp.com/https://${region}.api.riotgames.com/lol/league/v4/entries/by-summoner/${summonerId}?api_key=${
+			import.meta.env.VITE_RIOT_API_KEY || ''
+		}`
+	);
