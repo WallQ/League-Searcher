@@ -1,7 +1,11 @@
 import React from 'react';
 
 // API's
-import { getSummonerByName, getChampionsMasteries } from '../services/riotAPI';
+import {
+	getSummonerByName,
+	getChampionsMasteries,
+	getSummonerLeague,
+} from '../services/riotAPI';
 
 // Contexts
 import {
@@ -14,6 +18,7 @@ import { SearchFormDataInt } from '../components/SearchForm/SearchFormTypes';
 import {
 	SummonerType,
 	ChampionMasteryType,
+	SummonerLeagueType,
 } from '../contexts/Summoner/stateTypes';
 
 // PlaceHolder's
@@ -21,12 +26,21 @@ import {
 // Components
 import SearchForm from '../components/SearchForm/SearchForm';
 import SummonerCard from '../components/SummonerCard/SummonerCard';
+import LeagueCard from '../components/LeagueCard/LeagueCard';
 import MasteryCard from '../components/MasteryCard/MasteryCard';
 
 const Homepage: React.FunctionComponent = () => {
-	const { summoner, setSummoner, championsMasteries, setChampionsMasteries } =
-		React.useContext(SummonerContext) as SummonerContextType;
+	const {
+		summoner,
+		setSummoner,
+		championsMasteries,
+		setChampionsMasteries,
+		league,
+		setLeague,
+	} = React.useContext(SummonerContext) as SummonerContextType;
 	const [notFound, setNotFound] = React.useState<boolean | null>(null);
+	const [championsMasteriesCount, setChampionsMasteriesCount] =
+		React.useState<number>(3);
 
 	const onSubmit = (data: SearchFormDataInt) => {
 		getSummonerByName(data.region, data.username)
@@ -37,11 +51,15 @@ const Homepage: React.FunctionComponent = () => {
 					return;
 				}
 				setNotFound(false);
+				setChampionsMasteriesCount(3);
 				setSummoner(summoner);
 				getChampionsMasteries(data.region, summoner.id)
 					.then((championsMasteries: ChampionMasteryType[]) =>
 						setChampionsMasteries(championsMasteries)
 					)
+					.catch((error) => console.error('Error => ', error));
+				getSummonerLeague(data.region, summoner.id)
+					.then((league: SummonerLeagueType[]) => setLeague(league))
 					.catch((error) => console.error('Error => ', error));
 			})
 			.catch((error) => console.error('Error => ', error));
@@ -65,23 +83,42 @@ const Homepage: React.FunctionComponent = () => {
 							iconId={summoner.profileIconId}
 							level={summoner.summonerLevel}
 						/>
+						{league &&
+							league.map((league: any, index: number) => (
+								<LeagueCard
+									key={`${index}-LeagueCard`}
+									tier={league.tier}
+								/>
+							))}
 						{championsMasteries && (
-							<div className='grid grid-cols-1 gap-24 lg:grid-cols-3'>
-								{championsMasteries
-									.slice(0, 3)
-									.map((mastery: any, index: number) => (
-										<MasteryCard
-											key={`${index}-MasteryCard`}
-											championId={mastery.championId}
-											championLevel={
-												mastery.championLevel
-											}
-											championPoints={
-												mastery.championPoints
-											}
-										/>
-									))}
-							</div>
+							<React.Fragment>
+								<div className='grid grid-cols-1 gap-24 lg:grid-cols-3'>
+									{championsMasteries
+										.slice(0, championsMasteriesCount)
+										.map((mastery: any, index: number) => (
+											<MasteryCard
+												key={`${index}-MasteryCard`}
+												championId={mastery.championId}
+												championLevel={
+													mastery.championLevel
+												}
+												championPoints={
+													mastery.championPoints
+												}
+											/>
+										))}
+								</div>
+								<button
+									onClick={() =>
+										setChampionsMasteriesCount(
+											championsMasteriesCount + 6
+										)
+									}
+									type='submit'
+									className='w-full cursor-pointer rounded-md bg-blue-900 py-2 px-4 text-base font-medium text-white hover:bg-blue-600 lg:w-32'>
+									View More
+								</button>
+							</React.Fragment>
 						)}
 					</React.Fragment>
 				)}
